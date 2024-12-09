@@ -80,4 +80,14 @@ public class HomeController {
     public String addPengaduanPage() {
         return "addPengaduan";
     }
+
+    @GetMapping("/chatDesk")
+    public String chatDeskPage() {
+        return "chatDesk";
+    }
+
+    @GetMapping("/faq")
+    public String faqPage() {
+        return "faq";
+    }
 }
