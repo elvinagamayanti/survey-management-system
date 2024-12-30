@@ -61,6 +61,21 @@ public class HomeController {
         return "detailPengguna";
     }
     
+    @GetMapping("/manajemenSatker")
+    public String manajemenSatkerPage() {
+        return "manajemenSatker";
+    }
+
+    @GetMapping("/addSatker")
+    public String addSatkerPage() {
+        return "addSatker";
+    }
+
+    @GetMapping("/updateSatker")
+    public String updateSatkerPage() {
+        return "updateSatker";
+    }
+
     @GetMapping("/detailProfil")
     public String detailProfilPage() {
         return "detailProfil";
