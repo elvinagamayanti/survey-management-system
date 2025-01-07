@@ -750,6 +750,10 @@ video {
   margin-inline-start: 0.75rem;
 }
 
+.ms-4 {
+  margin-inline-start: 1rem;
+}
+
 .mt-14 {
   margin-top: 3.5rem;
 }
@@ -1139,6 +1143,11 @@ video {
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
 }
 
 .px-3 {
