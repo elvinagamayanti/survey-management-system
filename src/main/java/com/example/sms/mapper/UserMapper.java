@@ -20,7 +20,9 @@ public class UserMapper {
                 .id(user.getId())
                 .firstName(str[0])
                 .lastName(str[1])
+                .nip(user.getNip())
                 .email(user.getEmail())
+                .satker(user.getSatker())
                 .build();        
         return userDto;
     }    
@@ -29,7 +31,9 @@ public class UserMapper {
         User user = User.builder()
                 .id(userDto.getId())
                 .name(userDto.getFirstName() + " " + userDto.getLastName())
+                .nip(userDto.getNip())
                 .email(userDto.getEmail())
+                .satker(userDto.getSatker())
                 .build();        
         return user;
     }

@@ -34,6 +34,9 @@ public class User {
 
     @Column(nullable=false)
     private String name;
+    
+    @Column(nullable=false)
+    private String nip;
 
     @Column(nullable=false, unique=true)
     private String email;
@@ -47,4 +50,20 @@ public class User {
             joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
             inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
     private List<Role> roles = new ArrayList<>();
+    
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="satker_id")
+    private Satker satker;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Kegiatan> listKegiatans = new ArrayList<>();
+    
+    public String getNamaSatker(){
+        return "Badan Pusat Statistik " + satker.getName();
+    }
+    
+    @Override
+    public String toString(){
+        return name;
+    }
 }

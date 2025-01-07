@@ -5,16 +5,20 @@
 package com.example.sms.controller;
 
 import com.example.sms.dto.UserDto;
+import com.example.sms.entity.Satker;
 import com.example.sms.entity.User;
 import com.example.sms.service.UserService;
+import com.example.sms.repository.SatkerRepository;
 import jakarta.validation.Valid;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -24,6 +28,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
 
     private UserService userService;
+    
+    @Autowired
+    private SatkerRepository satkerRepository;
+
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -42,16 +50,18 @@ public class UserController {
     }
 
     // handler method to handle user registration form request
-    @GetMapping("/register")
+    @GetMapping("/superadmin/users/add")
     public String showRegistrationForm(Model model){
         // create model object to store form data
         UserDto user = new UserDto();
+        List<Satker> listSatkers = satkerRepository.findAll();
         model.addAttribute("user", user);
-        return "register";
+        model.addAttribute("listSatkers", listSatkers);
+        return "/admin/addPengguna";
     }
 
     // handler method to handle user registration form submit request
-    @PostMapping("/register/save")
+    @PostMapping("/superadmin/users/save")
     public String registration(@Valid @ModelAttribute("user") UserDto userDto,
                                BindingResult result,
                                Model model){
@@ -64,20 +74,26 @@ public class UserController {
 
         if(result.hasErrors()){
             model.addAttribute("user", userDto);
-            return "/register";
+            return "/admin/addPengguna";
         }
 
         userService.saveUser(userDto);
-        return "redirect:/register?success";
+        return "redirect:/superadmin/users";
     }
     
     // handler method to handle list of users
-    @GetMapping("/users")
+    @GetMapping("/superadmin/users")
     public String users(Model model){
         List<UserDto> users = userService.findAllUsers();
         model.addAttribute("users", users);
-        return "users";
+        return "/admin/manajemenPengguna";
     }
     
+    @GetMapping("/superadmin/users/detail")
+    public String viewUserDetail(@RequestParam("id") Long id, Model model) {
+        User user = userService.findUserById(id);
+        model.addAttribute("user", user);
+        return "/admin/detailPengguna";
+    }
 
 }

@@ -4,20 +4,17 @@
  */
 package com.example.sms.service;
 
-import com.example.sms.dto.UserDto;
-import com.example.sms.entity.User;
+import com.example.sms.dto.SatkerDto;
 import java.util.List;
 
 /**
  *
  * @author pinaa
  */
-public interface UserService {
-    void saveUser(UserDto userDto);
-
-    User findUserByEmail(String email);
-
-    List<UserDto> findAllUsers();
-    
-    User findUserById(Long id);
+public interface SatkerService {
+    List<SatkerDto> ambilDaftarSatker();
+    void perbaruiDataSatker(SatkerDto satkerDto);
+    void hapusDataSatker(Long satkerId);
+    void simpanDataSatker(SatkerDto satkerDto);
+    SatkerDto cariSatkerById(Long id);
 }
