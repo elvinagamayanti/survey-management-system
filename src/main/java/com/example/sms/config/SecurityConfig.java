@@ -41,6 +41,10 @@ public class SecurityConfig {
                                 .requestMatchers("/frontend/**").permitAll()
                                 .requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/users").hasRole("ADMIN")
+                                .requestMatchers("/superadmin/satkers/**").hasRole("ADMIN")
+                                .requestMatchers("/superadmin/users/**").hasRole("ADMIN")
+                                .requestMatchers("/superadmin/roles/**").hasRole("ADMIN")
+                                .requestMatchers("/operator/surveys/**").permitAll()
                                 .anyRequest().authenticated()
                 ).formLogin(
                         form -> form

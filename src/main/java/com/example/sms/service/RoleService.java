@@ -4,20 +4,17 @@
  */
 package com.example.sms.service;
 
-import com.example.sms.dto.UserDto;
-import com.example.sms.entity.User;
+import com.example.sms.dto.RoleDto;
 import java.util.List;
 
 /**
  *
  * @author pinaa
  */
-public interface UserService {
-    void saveUser(UserDto userDto);
-
-    User findUserByEmail(String email);
-
-    List<UserDto> findAllUsers();
-    
-    User findUserById(Long id);
+public interface RoleService {
+    List<RoleDto> ambilDaftarRole();
+    void perbaruiDataRole(RoleDto roleDto);
+    void hapusDataRole(Long roleId);
+    void simpanDataRole(RoleDto roleDto);
+    RoleDto cariRoleById(Long id);
 }

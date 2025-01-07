@@ -39,8 +39,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public void saveUser(UserDto userDto) {
         User user = UserMapper.mapToUser(userDto);
-        // encrypt the password using spring security
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        
+        user.setPassword(passwordEncoder.encode(userDto.getNip()));
 
         Role role = roleRepository.findByName("ROLE_USER");
         if(role == null){
@@ -67,5 +67,10 @@ public class UserServiceImpl implements UserService{
         Role role = new Role();
         role.setName("ROLE_USER");
         return roleRepository.save(role);
+    }
+    
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 }
