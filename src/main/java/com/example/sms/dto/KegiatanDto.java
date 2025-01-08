@@ -61,5 +61,14 @@ public class KegiatanDto {
     
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date updatedOn; 
+
+    public String getNamaSatker(){
+        return "Badan Pusat Statistik " + satker.getName();
+    }
+
+    public String getNamaUser(){
+        return user.getName();
+    }
+
 }
 

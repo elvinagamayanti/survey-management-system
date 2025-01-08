@@ -73,5 +73,13 @@ public class Kegiatan {
     public String toString(){
         return name;
     }
+
+    public String getNamaSatker(){
+        return "Badan Pusat Statistik " + satker.getName();
+    }
+
+    public String getNamaUser(){
+        return user.getName();
+    }
 }
 

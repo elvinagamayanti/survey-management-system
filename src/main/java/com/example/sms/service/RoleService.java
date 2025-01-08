@@ -5,6 +5,8 @@
 package com.example.sms.service;
 
 import com.example.sms.dto.RoleDto;
+import com.example.sms.entity.User;
+
 import java.util.List;
 
 /**
@@ -17,4 +19,5 @@ public interface RoleService {
     void hapusDataRole(Long roleId);
     void simpanDataRole(RoleDto roleDto);
     RoleDto cariRoleById(Long id);
+    List<User> getUsersByRoleId(Long roleId);
 }

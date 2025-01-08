@@ -4,12 +4,17 @@
  */
 package com.example.sms.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.sms.entity.User;
+
 import java.util.Optional;
 // import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -24,4 +29,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     
     Optional<User> findByName(String fullName);
 
+    @Query("SELECT u FROM User u JOIN u.roles r WHERE r.id = :roleId")
+    List<User> findAllUsersByRoleId(@Param("roleId") Long roleId);
 }
