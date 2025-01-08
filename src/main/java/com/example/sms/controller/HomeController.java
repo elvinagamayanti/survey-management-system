@@ -61,6 +61,21 @@ public class HomeController {
         return "detailPengguna";
     }
     
+    @GetMapping("/manajemenSatker")
+    public String manajemenSatkerPage() {
+        return "manajemenSatker";
+    }
+
+    @GetMapping("/addSatker")
+    public String addSatkerPage() {
+        return "addSatker";
+    }
+
+    @GetMapping("/updateSatker")
+    public String updateSatkerPage() {
+        return "updateSatker";
+    }
+
     @GetMapping("/detailProfil")
     public String detailProfilPage() {
         return "detailProfil";
@@ -79,5 +94,15 @@ public class HomeController {
     @GetMapping("/addPengaduan")
     public String addPengaduanPage() {
         return "addPengaduan";
+    }
+
+    @GetMapping("/chatDesk")
+    public String chatDeskPage() {
+        return "chatDesk";
+    }
+
+    @GetMapping("/faq")
+    public String faqPage() {
+        return "faq";
     }
 }
