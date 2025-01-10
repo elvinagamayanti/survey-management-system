@@ -9,9 +9,14 @@ import com.example.sms.entity.Role;
 import com.example.sms.mapper.RoleMapper;
 import com.example.sms.repository.RoleRepository;
 import com.example.sms.service.RoleService;
+
 import java.util.List;
 import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
+
+import com.example.sms.entity.User;
+import com.example.sms.repository.UserRepository;
 
 /**
  *
@@ -20,9 +25,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl implements RoleService {
     private RoleRepository roleRepository;
+    private UserRepository userRepository;
 
-    public RoleServiceImpl(RoleRepository roleRepository) {
+    public RoleServiceImpl(RoleRepository roleRepository, UserRepository userRepository) {
         this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -56,5 +63,10 @@ public class RoleServiceImpl implements RoleService {
     public RoleDto cariRoleById(Long id) {
         Role role = roleRepository.findById(id).get();
         return RoleMapper.mapToRoleDto(role);
+    }
+
+    @Override
+    public List<User> getUsersByRoleId(Long roleId) {
+        return userRepository.findAllUsersByRoleId(roleId);
     }
 }

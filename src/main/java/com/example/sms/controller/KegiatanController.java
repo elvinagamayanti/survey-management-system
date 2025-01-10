@@ -4,14 +4,8 @@
  */
 package com.example.sms.controller;
 
-import com.example.sms.dto.KegiatanDto;
-import com.example.sms.entity.Kegiatan;
-import com.example.sms.entity.User;
-import com.example.sms.repository.KegiatanRepository;
-import com.example.sms.repository.UserRepository;
-import com.example.sms.service.KegiatanService;
-import jakarta.validation.Valid;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,8 +13,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.sms.dto.KegiatanDto;
+import com.example.sms.entity.Kegiatan;
+import com.example.sms.entity.User;
+import com.example.sms.repository.UserRepository;
+import com.example.sms.service.KegiatanService;
+
+import jakarta.validation.Valid;
 
 /**
  *
@@ -57,6 +60,7 @@ public class KegiatanController {
         kegiatanDto.setUser(user);
         kegiatanDto.setSatker(user.getSatker());
         model.addAttribute("kegiatanDto", kegiatanDto);
+        model.addAttribute("user", user);
         return "/operator/addKegiatan";
     }    
     
@@ -69,22 +73,22 @@ public class KegiatanController {
         return "redirect:/operator/surveys";
     }
 
-//    @GetMapping("/operator/surveys/{kegiatanId}/update")
-//    public String updateKegiatanForm (@PathVariable("kegiatanId") Long kegiatanId,
-//            Model model) {
-//        KegiatanDto kegiatanDto = kegiatanService.cariKegiatanById(kegiatanId);
-//        model.addAttribute("kegiatanDto", kegiatanDto);
-//        return "/operator/updateKegiatan";
-//    }
+   @GetMapping("/operator/surveys/{kegiatanId}/update")
+   public String updateKegiatanForm (@PathVariable("kegiatanId") Long kegiatanId,
+           Model model) {
+       KegiatanDto kegiatanDto = kegiatanService.cariKegiatanById(kegiatanId);
+       model.addAttribute("kegiatanDto", kegiatanDto);
+       return "/operator/updateKegiatan";
+   }
 
-//    @PostMapping("/operator/surveys/update") 
-//    public String updateKegiatan (@Valid KegiatanDto kegiatanDto, BindingResult result) {
-//        if (result.hasErrors()) {
-//            return "/operator/updateKegiatan";
-//        }
-//        kegiatanService.perbaruiDataKegiatan(kegiatanDto);
-//        return "redirect:/operator/surveys";
-//    }
+   @PostMapping("/operator/surveys/update") 
+   public String updateKegiatan (@Valid KegiatanDto kegiatanDto, BindingResult result) {
+       if (result.hasErrors()) {
+           return "/operator/updateKegiatan";
+       }
+       kegiatanService.perbaruiDataKegiatan(kegiatanDto);
+       return "redirect:/operator/surveys";
+   }
 //    
 //    @GetMapping("/operator/surveys/{kegiatanId}/delete") 
 //    public String deleteKegiatan (@PathVariable("kegiatanId") Long kegiatanId) {
