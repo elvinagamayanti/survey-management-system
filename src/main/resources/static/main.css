@@ -1206,6 +1206,10 @@ video {
   padding-inline-end: 0.25rem;
 }
 
+.pl-11 {
+  padding-left: 2.75rem;
+}
+
 .pr-3 {
   padding-right: 0.75rem;
 }
@@ -1228,6 +1232,10 @@ video {
 
 .pt-5 {
   padding-top: 1.25rem;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .text-center {
