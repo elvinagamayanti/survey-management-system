@@ -4,13 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#008ed6',
+        primary: 'var(--color-primary)',
         secondary: '#0aadff',
-        'tahiti': {
-          light: '#67e8f9',
-          DEFAULT: '#06b6d4',
-          dark: '#0e7490',
-        },
       },
     },
   },
