@@ -6,6 +6,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Created on : Nov 29, 2024, 7:22:05 AM
     Author     : pinaa
 */
+@import '@fontsource/inter';
 
 @tailwind base;
 @tailwind components;

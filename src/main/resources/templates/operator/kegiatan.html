@@ -16,8 +16,8 @@
         <div class="p-4 mt-14">
             <div class="flex justify-between mb-6">
                 <div>
-                    <h1 class="text-4xl text-blue-900 font-extrabold dark:text-white">Kegiatan</h1>
-                    <h2 class="text-2xl text-blue-900 font-normal dark:text-white">Badan Pusat Statistik RI</h2>
+                    <h1 class="text-4xl text-font font-extrabold dark:text-white">Kegiatan</h1>
+                    <h2 class="text-2xl text-font font-normal dark:text-white">Badan Pusat Statistik RI</h2>
                 </div>
                 <a th:href="@{/operator/surveys/add}">
                     <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tambah Kegiatan</button>
@@ -35,7 +35,7 @@
                                 </svg>
                             </span>
                         </th>
-                        <th data-type="date" data-format="YYYY/DD/MM">
+                        <th>
                             <span class="flex items-center">
                                 Nama Kegiatan
                                 <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -67,7 +67,6 @@
                                 </svg>
                             </span>
                         </th>
-<!--                        <th></th>-->
                     </tr>
                 </thead>
                 <tbody>
@@ -77,17 +76,18 @@
                         <td th:text="${kegiatanDto.satker}">Satuan Kerja</td>
                         <td th:text="${kegiatanDto.user}">Penanggung Jawab</td>
                         <td>
-                            <a th:href="@{/operator/surveys/detail(id=${kegiatanDto.id})}">
-                                <button class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">Detail</button>
-                            </a>
-                           <a th:href="@{/operator/surveys/{id}/update(id=${kegiatanDto.id})}">
-                                <button class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-700">Update</button>
-                            </a>
+                            <div class="flex justify-between">
+                                <a th:href="@{/operator/surveys/detail(id=${kegiatanDto.id})}" class="px-0.5">
+                                    <button class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">Detail</button>
+                                </a>
+                                <a th:href="@{/operator/surveys/{id}/update(id=${kegiatanDto.id})}" class="px-0.5">
+                                    <button class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-700">Update</button>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
-
         </div>
     </div>
 
