@@ -19,6 +19,8 @@ public class SatkerMapper {
                 .name(satker.getName())
                 .code(satker.getCode())
                 .address(satker.getAddress())
+                .number(satker.getNumber())
+                .email(satker.getEmail())
                 .createdOn(satker.getCreatedOn())
                 .updatedOn(satker.getUpdatedOn())
                 .build();        
@@ -31,6 +33,8 @@ public class SatkerMapper {
                 .name(satkerDto.getName())
                 .code(satkerDto.getCode())
                 .address(satkerDto.getAddress())
+                .number(satkerDto.getNumber())
+                .email(satkerDto.getEmail())
                 .createdOn(satkerDto.getCreatedOn())
                 .updatedOn(satkerDto.getUpdatedOn())
                 .build();        

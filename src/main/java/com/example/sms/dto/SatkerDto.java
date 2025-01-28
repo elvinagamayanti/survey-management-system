@@ -4,13 +4,15 @@
  */
 package com.example.sms.dto;
 
-import jakarta.validation.constraints.NotEmpty;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -28,6 +30,8 @@ public class SatkerDto {
     @NotEmpty(message = "Kode Satuan Kerja tidak boleh kosong")
     private String code;
     private String address;
+    private String number;
+    private String email;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date createdOn;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)

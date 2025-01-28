@@ -41,6 +41,12 @@ public class Satker {
     
     @Column(nullable = true)
     private String address;
+
+    @Column(nullable = true)
+    private String number;
+
+    @Column(nullable = true)
+    private String email;
     
     @Column(nullable = false)
     @CreationTimestamp
