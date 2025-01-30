@@ -44,6 +44,7 @@ public class SecurityConfig {
                                 .requestMatchers("/superadmin/satkers/**").hasRole("ADMIN")
                                 .requestMatchers("/superadmin/users/**").hasRole("ADMIN")
                                 .requestMatchers("/superadmin/roles/**").hasRole("ADMIN")
+                                .requestMatchers("/superadmin/provinces/**").hasRole("ADMIN")
                                 .requestMatchers("/operator/surveys/**").permitAll()
                                 .anyRequest().authenticated()
                 ).formLogin(

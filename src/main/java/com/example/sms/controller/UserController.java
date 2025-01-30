@@ -4,13 +4,8 @@
  */
 package com.example.sms.controller;
 
-import com.example.sms.dto.UserDto;
-import com.example.sms.entity.Satker;
-import com.example.sms.entity.User;
-import com.example.sms.service.UserService;
-import com.example.sms.repository.SatkerRepository;
-import jakarta.validation.Valid;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.sms.dto.UserDto;
+import com.example.sms.entity.Satker;
+import com.example.sms.entity.User;
+import com.example.sms.repository.SatkerRepository;
+import com.example.sms.service.UserService;
+
+import jakarta.validation.Valid;
 
 /**
  *

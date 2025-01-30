@@ -5,10 +5,13 @@
 package com.example.sms.repository;
 
 import com.example.sms.entity.Satker;
+import com.example.sms.entity.User;
+
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -23,5 +26,8 @@ public interface SatkerRepository extends JpaRepository<Satker, Long> {
             " s.code LIKE CONCAT('%', :query, '%') OR " +
             " s.name LIKE CONCAT('%', :query, '%')")
     List<Satker> searchSatker(String query);
+
+    @Query("SELECT s FROM Satker s WHERE s.province = :provinceCode")
+    List<Satker> findAllSatkersByProvinceCode(@Param("provinceCode") String provinceCode);
 
 }
