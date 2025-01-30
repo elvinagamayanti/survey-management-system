@@ -88,7 +88,7 @@ public class HomeController {
 
     @GetMapping("/pengaduan")
     public String pengaduanPage() {
-        return "pengaduan";
+        return "operator/pengaduan";
     }
     
     @GetMapping("/addPengaduan")

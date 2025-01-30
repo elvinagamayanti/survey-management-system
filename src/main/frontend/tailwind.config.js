@@ -3,15 +3,24 @@ module.exports = {
   content: ["../resources/templates/**/*.{html,js}"],
   theme: {
     extend: {
-      colors: {
-        primary: '#008ed6',
-        secondary: '#0aadff',
-        'tahiti': {
-          light: '#67e8f9',
-          DEFAULT: '#06b6d4',
-          dark: '#0e7490',
-        },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'], // Default font-family
       },
+      colors: {
+        primary: '#002B6A',
+        icon: '#0093dd',
+        font: '#003c90',
+        hover: '#001d47',
+        active: '00245a',
+      },
+      backgroundColor: {
+        autofill: 'transparent',
+      },
+    },
+  },
+  variants: {
+    extend: {
+      backgroundColor: ['autofill'], // Mendukung pseudo-class autofill
     },
   },
   plugins: [],
