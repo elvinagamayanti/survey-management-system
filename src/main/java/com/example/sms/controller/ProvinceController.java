@@ -13,6 +13,8 @@ import jakarta.validation.Valid;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.sms.entity.Province;
 import com.example.sms.entity.Satker;
+import com.example.sms.repository.SatkerRepository;
 
 /**
  *
@@ -30,6 +33,9 @@ import com.example.sms.entity.Satker;
 @Controller
 public class ProvinceController {
     private ProvinceService provinceService;
+
+    @Autowired
+    private SatkerRepository satkerRepository;
 
     public ProvinceController(ProvinceService provinceService) {
         this.provinceService = provinceService;
@@ -81,13 +87,21 @@ public class ProvinceController {
 //        return "redirect:/superadmin/provinces";
 //    }
 
+    // @GetMapping("/superadmin/provinces/{provinceCode}/satkers")
+    // public String getSatkersByProvince(@PathVariable("provinceCode") String provinceCode, Model model) {
+    //     List<Satker> satkers = provinceService.getSatkersByProvinceCode(provinceCode);
+    //     // ProvinceDto province = provinceService.cariProvinceByCode(provinceCode);
+    //     model.addAttribute("satkers", satkers);
+    //     model.addAttribute("provinceCode", provinceCode);
+    //     // model.addAttribute("province", province);
+    //     return "/superadmin/satkersByProvince"; 
+    // }
     @GetMapping("/superadmin/provinces/{provinceCode}/satkers")
-    public String getSatkersByProvince(@PathVariable("provinceCode") String provinceCode, Model model) {
-        List<Satker> satkers = provinceService.getSatkersByProvinceCode(provinceCode);
-        // ProvinceDto province = provinceService.cariProvinceByCode(provinceCode);
+    public String getSatkersByProvince(@PathVariable String provinceCode, Model model) {
+        List<Satker> satkers = satkerRepository.findByCodeStartingWith(provinceCode);
+        ProvinceDto provinceDto = provinceService.cariProvinceByCode(provinceCode);
         model.addAttribute("satkers", satkers);
-        model.addAttribute("provinceCode", provinceCode);
-        // model.addAttribute("province", province);
-        return "/superadmin/satkersByProvince"; 
+        model.addAttribute("provinceDto", provinceDto);
+        return "/superadmin/satkersByProvince";
     }
 }

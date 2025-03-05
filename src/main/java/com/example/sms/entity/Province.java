@@ -4,6 +4,7 @@
  */
 package com.example.sms.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -44,6 +45,6 @@ public class Province {
     @Column(nullable = false)
     private String code;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "province", cascade = CascadeType.ALL)
-    private List<Satker> satkerList;
+    @OneToMany(mappedBy = "province", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Satker> listSatkers = new ArrayList<>();
 }

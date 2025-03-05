@@ -5,9 +5,7 @@
 package com.example.sms.mapper;
 
 import com.example.sms.dto.KegiatanDto;
-import com.example.sms.dto.SatkerDto;
 import com.example.sms.entity.Kegiatan;
-import com.example.sms.entity.Satker;
 
 /**
  *

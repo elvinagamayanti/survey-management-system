@@ -4,19 +4,18 @@
  */
 package com.example.sms.service.impl;
 
-import com.example.sms.dto.RoleDto;
-import com.example.sms.entity.Role;
-import com.example.sms.mapper.RoleMapper;
-import com.example.sms.repository.RoleRepository;
-import com.example.sms.service.RoleService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.example.sms.dto.RoleDto;
+import com.example.sms.entity.Role;
 import com.example.sms.entity.User;
+import com.example.sms.mapper.RoleMapper;
+import com.example.sms.repository.RoleRepository;
 import com.example.sms.repository.UserRepository;
+import com.example.sms.service.RoleService;
 
 /**
  *

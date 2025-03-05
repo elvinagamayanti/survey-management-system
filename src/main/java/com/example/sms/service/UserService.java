@@ -20,4 +20,8 @@ public interface UserService {
     List<UserDto> findAllUsers();
     
     User findUserById(Long id);
+
+    User getCurrentUser();
+
+    User getUserLogged();
 }

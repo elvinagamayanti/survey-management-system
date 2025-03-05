@@ -66,6 +66,19 @@ public class ProvinceServiceImpl implements ProvinceService {
         return ProvinceMapper.mapToProvinceDto(province);
     }
 
+    @Override
+    public ProvinceDto cariProvinceByCode(String code) {
+        Province province = provinceRepository.findByCode(code).get();
+        return ProvinceMapper.mapToProvinceDto(province);
+    }
+    // @Override
+    // public ProvinceDto cariProvinceByCode(String code) {
+    //     Province province = provinceRepository.findByCode(code)
+    //         .orElseThrow(() -> new RuntimeException("Province dengan code " + code + " tidak ditemukan"));
+
+    //     return ProvinceMapper.mapToProvinceDto(province);
+    // }
+
     // @Override
     // public ProvinceDto cariProvinceByCode(String code) {
     //     Optional<Province> optionalProvince = provinceRepository.findByCode(code);
@@ -76,8 +89,8 @@ public class ProvinceServiceImpl implements ProvinceService {
     //     }
     // }
 
-    @Override
-    public List<Satker> getSatkersByProvinceCode(String provinceCode) {
-        return satkerRepository.findAllSatkersByProvinceCode(provinceCode);
-    }
+    // @Override
+    // public List<Satker> getSatkersByProvinceCode(String provinceCode) {
+    //     return satkerRepository.findAllSatkersByProvinceCode(provinceCode);
+    // }
 }

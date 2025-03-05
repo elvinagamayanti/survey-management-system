@@ -5,6 +5,9 @@
 package com.example.sms.repository;
 
 import com.example.sms.entity.Province;
+
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -14,5 +17,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ProvinceRepository extends JpaRepository<Province, Long> {
 
     Province findByName(String name);
-    Province findByCode(String code);
+    Optional<Province> findByCode(String code);
 }

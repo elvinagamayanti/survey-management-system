@@ -20,6 +20,6 @@ public interface ProvinceService {
     void hapusDataProvinsi(Long provinceId);
     void simpanDataProvinsi(ProvinceDto provinceDto);
     ProvinceDto cariProvinceById(Long id);
-    // ProvinceDto cariProvinceByCode(String code);
-    List<Satker> getSatkersByProvinceCode(String provinceCode);
+    ProvinceDto cariProvinceByCode(String code);
+    // List<Satker> getSatkersByProvinceCode(String provinceCode);
 }
