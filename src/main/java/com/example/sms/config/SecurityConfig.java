@@ -35,7 +35,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-        .csrf(csrf -> csrf.disable()) // Disable CSRF
+        .csrf(csrf -> csrf.disable()) 
         .authorizeHttpRequests(auth -> auth
                                 .requestMatchers("/static/**").permitAll()
                                 .requestMatchers("/frontend/**").permitAll()
@@ -44,6 +44,7 @@ public class SecurityConfig {
                                 .requestMatchers("/superadmin/satkers/**").hasRole("ADMIN")
                                 .requestMatchers("/superadmin/users/**").hasRole("ADMIN")
                                 .requestMatchers("/superadmin/roles/**").hasRole("ADMIN")
+                                .requestMatchers("/superadmin/provinces/**").hasRole("ADMIN")
                                 .requestMatchers("/operator/surveys/**").permitAll()
                                 .anyRequest().authenticated()
                 ).formLogin(

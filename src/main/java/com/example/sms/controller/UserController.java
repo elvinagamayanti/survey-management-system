@@ -4,14 +4,11 @@
  */
 package com.example.sms.controller;
 
-import com.example.sms.dto.UserDto;
-import com.example.sms.entity.Satker;
-import com.example.sms.entity.User;
-import com.example.sms.service.UserService;
-import com.example.sms.repository.SatkerRepository;
-import jakarta.validation.Valid;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +16,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.sms.dto.UserDto;
+import com.example.sms.entity.Satker;
+import com.example.sms.entity.User;
+import com.example.sms.repository.SatkerRepository;
+import com.example.sms.repository.UserRepository;
+import com.example.sms.service.UserService;
+
+import jakarta.validation.Valid;
 
 /**
  *
@@ -31,6 +37,8 @@ public class UserController {
     
     @Autowired
     private SatkerRepository satkerRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 
     public UserController(UserService userService) {
@@ -39,8 +47,25 @@ public class UserController {
 
     // handler method to handle home page request
     @GetMapping("/index")
-    public String home(){
+    public String home(Model model){
+        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        User user = userRepository.findByEmail(username);
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+        model.addAttribute("user", user);
         return "index";
+    }
+
+    @GetMapping("/navbar")
+    public String navbar(Model model){
+        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        User user = userRepository.findByEmail(username);
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+        model.addAttribute("user", user);
+        return "/layout/navbar";
     }
     
     // handler method to handle login request
@@ -48,6 +73,7 @@ public class UserController {
     public String login(){
         return "login";
     }
+
 
     // handler method to handle user registration form request
     @GetMapping("/superadmin/users/add")
@@ -94,6 +120,35 @@ public class UserController {
         User user = userService.findUserById(id);
         model.addAttribute("user", user);
         return "/admin/detailPengguna";
+    }
+
+    // @GetMapping("/navbar")
+    // public String navbar(Model model) {
+    //     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    //     if (authentication != null && authentication.getPrincipal() instanceof UserDetails) {
+    //         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+    //         User user = userService.findUserByEmail(userDetails.getUsername());
+    //         model.addAttribute("currentUser", user);
+    //     }
+    //     return "layout/navbar";
+    // }
+
+    @ModelAttribute("currentUser")
+    public User getCurrentUser() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        User currentUser = userService.findUserByEmail(email);
+        return currentUser;
+    }
+
+    @GetMapping("/user/detail")
+    public String viewProfileDetail(Model model) {
+        String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
+        User user = userRepository.findByEmail(username);
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+        model.addAttribute("user", user);
+        return "/detailProfil";
     }
 
 }

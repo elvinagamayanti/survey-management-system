@@ -14,6 +14,11 @@ import com.example.sms.service.UserService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +33,8 @@ public class UserServiceImpl implements UserService{
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
 
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+    
     public UserServiceImpl(UserRepository userRepository,
                            RoleRepository roleRepository,
                            PasswordEncoder passwordEncoder) {
@@ -73,4 +80,31 @@ public class UserServiceImpl implements UserService{
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
+
+    @Override
+    public User getCurrentUser() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User getUserLogged() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated() || authentication.getPrincipal().equals("anonymousUser")) {
+            logger.warn("User belum login atau anonymous");
+            return null;
+        }
+
+        String currentPrincipalName = authentication.getName();
+        logger.info("User login dengan email: {}", currentPrincipalName);
+
+        User user = userRepository.findByEmail(currentPrincipalName);
+        if (user == null) {
+            logger.error("User dengan email {} tidak ditemukan di database!", currentPrincipalName);
+        }
+
+        return user;
+    }
+
 }

@@ -7,7 +7,11 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +45,12 @@ public class Satker {
     
     @Column(nullable = true)
     private String address;
+
+    @Column(nullable = true)
+    private String number;
+
+    @Column(nullable = true)
+    private String email;
     
     @Column(nullable = false)
     @CreationTimestamp
@@ -56,7 +66,14 @@ public class Satker {
     
     @OneToMany(mappedBy = "satker", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Kegiatan> listKegiatans = new ArrayList<>();
-    
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "province_code", referencedColumnName = "code", nullable = false)
+    private Province province;
+
+    @Column(nullable = false)
+    private Boolean isProvince;
+
     @Override
     public String toString(){
         return name;
