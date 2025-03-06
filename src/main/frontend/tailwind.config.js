@@ -7,7 +7,8 @@ module.exports = {
         sans: ['Inter', 'sans-serif'], // Default font-family
       },
       colors: {
-        primary: '#002B6A',
+        primary: '#0099dd', // #002B6A
+        secondary: '#75d1ff',
         icon: '#0093dd',
         font: '#003c90',
         hover: '#001d47',
