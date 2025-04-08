@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.sms.dto.KegiatanDto;
 import com.example.sms.entity.Kegiatan;
+import com.example.sms.entity.Program;
 import com.example.sms.entity.User;
+import com.example.sms.repository.ProgramRepository;
 import com.example.sms.repository.UserRepository;
 import com.example.sms.service.KegiatanService;
 
@@ -35,6 +37,9 @@ public class KegiatanController {
     
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ProgramRepository programRepository;
     
     public KegiatanController(KegiatanService kegiatanService) {
         this.kegiatanService = kegiatanService;
@@ -50,6 +55,8 @@ public class KegiatanController {
     @GetMapping("/operator/surveys/add")
     public String addKegiatanForm(Model model) {
         KegiatanDto kegiatanDto = new KegiatanDto();
+
+        List<Program> listPrograms = programRepository.findAll();
         
         String username = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
         User user = userRepository.findByEmail(username);
@@ -60,6 +67,7 @@ public class KegiatanController {
         kegiatanDto.setUser(user);
         kegiatanDto.setSatker(user.getSatker());
         model.addAttribute("kegiatanDto", kegiatanDto);
+        model.addAttribute("listPrograms", listPrograms);
         model.addAttribute("user", user);
         return "/operator/addKegiatan";
     }    
@@ -77,7 +85,9 @@ public class KegiatanController {
    public String updateKegiatanForm (@PathVariable("kegiatanId") Long kegiatanId,
            Model model) {
        KegiatanDto kegiatanDto = kegiatanService.cariKegiatanById(kegiatanId);
+       List<Program> listPrograms = programRepository.findAll();
        model.addAttribute("kegiatanDto", kegiatanDto);
+       model.addAttribute("listPrograms", listPrograms);
        return "/operator/updateKegiatan";
    }
 

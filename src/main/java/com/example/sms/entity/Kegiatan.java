@@ -1,6 +1,15 @@
 package com.example.sms.entity;
 
-import jakarta.persistence.CascadeType;
+import java.math.BigDecimal;
+import java.time.Year;
+import java.time.ZoneId;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,19 +18,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Setter
 @Getter
@@ -41,7 +43,7 @@ public class Kegiatan {
     @Column(nullable = true)
     private String code;
     
-    @Column(nullable = false)
+    @Column(nullable = true)
     private BigDecimal budget;
     
     @Column(nullable = false)
@@ -59,6 +61,10 @@ public class Kegiatan {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "satker_id", nullable = false) // Relasi ke Satker
     private Satker satker;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "program_id", nullable = false) // Relasi ke Program
+    private Program program;
     
     @Column(nullable = false)
     @CreationTimestamp
@@ -80,6 +86,16 @@ public class Kegiatan {
 
     public String getNamaUser(){
         return user.getName();
+    }
+
+    public String getNamaProgram(){
+        return program.getName();
+    }
+
+    public String getYear(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        return String.valueOf(calendar.get(Calendar.YEAR));
     }
 }
 
