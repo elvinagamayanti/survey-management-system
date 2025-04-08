@@ -11,7 +11,7 @@ module.exports = {
         secondary: '#75d1ff',
         icon: '#0093dd',
         font: '#003c90',
-        hover: '#001d47',
+        fontdark: '#001d47',
         active: '00245a',
       },
       backgroundColor: {

@@ -100,7 +100,7 @@ public class KegiatanController {
     public String viewKegiatanDetail(@RequestParam("id") Long id, Model model) {
         Kegiatan kegiatan = kegiatanService.findKegiatanById(id);
         model.addAttribute("kegiatan", kegiatan);
-        return "/operator/detailKegiatanTest";
+        return "/operator/detailKegiatan";
     }
 
 }
