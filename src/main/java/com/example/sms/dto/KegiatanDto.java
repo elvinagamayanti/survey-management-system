@@ -4,21 +4,24 @@
  */
 package com.example.sms.dto;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.example.sms.entity.Program;
 import com.example.sms.entity.Satker;
 import com.example.sms.entity.User;
+
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import java.math.BigDecimal;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -37,8 +40,7 @@ public class KegiatanDto {
     
     @NotEmpty(message = "Kode Satuan Kerja tidak boleh kosong")
     private String code;
-    
-    @NotNull(message = "Besar anggaran tidak boleh kosong.")
+
     @DecimalMin(value = "0.0", inclusive = false, message = "Besar anggaran harus lebih besar dari 0.")
     private BigDecimal budget;
     
@@ -49,6 +51,10 @@ public class KegiatanDto {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "satker_id", nullable = false) // Relasi ke Satker
     private Satker satker;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "program_id", nullable = false) // Relasi ke Program
+    private Program program;
     
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date startDate;
