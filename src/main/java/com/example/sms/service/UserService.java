@@ -4,9 +4,10 @@
  */
 package com.example.sms.service;
 
+import java.util.List;
+
 import com.example.sms.dto.UserDto;
 import com.example.sms.entity.User;
-import java.util.List;
 
 /**
  *
@@ -24,4 +25,11 @@ public interface UserService {
     User getCurrentUser();
 
     User getUserLogged();
+
+    // New methods for role management
+    void assignRoleToUser(Long userId, Long roleId);
+    
+    void removeRoleFromUser(Long userId, Long roleId);
+    
+    boolean hasRole(User user, String roleName);
 }

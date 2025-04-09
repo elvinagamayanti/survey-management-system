@@ -49,27 +49,38 @@
                         </th>
                         <th>
                             <span class="flex items-center">
+                                Peran
+                                <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
+                                </svg>
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
                                 Aksi
                                 <svg class="w-4 h-4 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 15 4 4 4-4m0-6-4-4-4 4"/>
                                 </svg>
                             </span>
                         </th>
-<!--                        <th></th>-->
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer" th:each="user : ${users}">
                         <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white" th:text="${user.id}">ID</td>
                         <td th:text="${user.fullName}">Nama</td>
-                        <td th:text="${user.email}">Kode</td>
+                        <td th:text="${user.email}">Email</td>
                         <td>
-                            <a th:href="@{/superadmin/users/detail(id=${user.id})}">
-                                <button class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">Detail</button>
+                            <a th:href="@{/superadmin/users/{id}/roles(id=${user.id})}">
+                                <button class="text-white bg-purple-600 hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:ring-purple-700">Kelola Peran</button>
                             </a>
-<!--                            <a th:href="@{/superadmin/satkers/{id}/delete(id=${stkDto.id})}">
-                                <button class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-700">Delete</button>
-                            </a>-->
+                        </td>
+                        <td>
+                            <div class="flex space-x-2">
+                                <a th:href="@{/superadmin/users/detail(id=${user.id})}">
+                                    <button class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-500 dark:hover:bg-green-600 dark:focus:ring-green-700">Detail</button>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
