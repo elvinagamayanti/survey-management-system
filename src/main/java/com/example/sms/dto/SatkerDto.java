@@ -44,5 +44,10 @@ public class SatkerDto {
     private Date createdOn;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date updatedOn; 
+
+    @Override
+    public String toString(){
+        return name;
+    }
 }
 

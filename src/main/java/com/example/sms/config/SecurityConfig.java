@@ -45,7 +45,10 @@ public class SecurityConfig {
                                 .requestMatchers("/superadmin/users/**").hasRole("ADMIN")
                                 .requestMatchers("/superadmin/roles/**").hasRole("ADMIN")
                                 .requestMatchers("/superadmin/provinces/**").hasRole("ADMIN")
+                                .requestMatchers("/superadmin/programs/**").hasRole("ADMIN")
                                 .requestMatchers("/operator/surveys/**").permitAll()
+                                .requestMatchers("/main.css").permitAll()
+                                .requestMatchers("/SMS-Logo.png").permitAll()
                                 .anyRequest().authenticated()
                 ).formLogin(
                         form -> form

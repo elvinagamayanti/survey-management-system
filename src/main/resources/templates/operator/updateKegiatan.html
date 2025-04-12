@@ -14,8 +14,8 @@
     <div class="p-4 sm:ml-64">
         <div class="p-4 mt-14">
             <div class="mb-6">
-                <h1 class="text-4xl text-font font-extrabold dark:text-white">Perbarui Data Kegiatan</h1>
-                <h2 class="text-2xl text-font font-normal dark:text-white mb-6">Industri Makro dan Kecil 2024</h2>
+                <h1 class="text-4xl text-font font-extrabold dark:text-white">Perbarui Data Survei</h1>
+                <h2 class="text-2xl text-font font-normal dark:text-white mb-6" th:text="${kegiatanDto.name}">Industri Makro dan Kecil 2024</h2>
             </div>
 
             <form class="w-full mx-auto" role="form" method="post" th:object="${kegiatanDto}" th:action="@{/operator/surveys/update}">
@@ -28,15 +28,23 @@
                         <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p> 
                     </div>
                     <div class="relative z-0 w-full mb-5 group">
+                        <select name="floating_program" id="floating_program" th:field="*{program}" class="block py-2.5 px-0 w-full text-sm text-gray-200 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer">
+                            <option value="" selected>Pilih Nama Kegiatan</option>
+                            <option th:each="program : ${listPrograms}" th:value="${program.id}" th:text="${program.name}"></option>
+                        </select>
+                        <label for="floating_program" class="absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Nama Kegiatan</label>
+                        <p th:if="${#fields.hasErrors('program')}" class="text-danger" th:errors="*{program}"></p> 
+                    </div>  
+                    <div class="relative z-0 w-full mb-5 group">
                         <input type="text" id="floating_code" th:field="*{code}" class="block py-2.5 px-0 w-full text-sm text-gray-200 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />
                         <label for="floating_code" class="absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Kode Kegiatan</label>
                         <p th:if="${#fields.hasErrors('code')}" class="text-danger" th:errors="*{code}"></p> 
                     </div>
-                    <div class="relative z-0 w-full mb-5 group">
+                    <!-- <div class="relative z-0 w-full mb-5 group">
                         <input type="number" step="0.01" min="0.01" id="floating_anggaran" th:field="*{budget}" class="block py-2.5 px-0 w-full text-sm text-gray-200 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />
                         <label for="floating_anggaran" class="absolute text-sm text-white dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Besar Anggaran</label>
                         <p th:if="${#fields.hasErrors('budget')}" class="text-danger" th:errors="*{budget}"></p> 
-                    </div>
+                    </div> -->
                     <div class="grid md:grid-cols-2 md:gap-6">
                     <div class="relative z-0 w-full mb-5 group">
                         <input type="date" name="floating_tanggal_mulai" id="floating_tanggal_mulai" th:field="*{startDate}" class="block py-2.5 px-0 w-full text-sm text-gray-200 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />

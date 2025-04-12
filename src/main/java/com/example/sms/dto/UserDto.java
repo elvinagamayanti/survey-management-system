@@ -4,17 +4,13 @@
  */
 package com.example.sms.dto;
 
-import com.example.sms.entity.Role;
 import com.example.sms.entity.Satker;
+
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import java.util.ArrayList;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -55,6 +51,11 @@ public class UserDto {
     }
     
     public String getFullName(){
+        return firstName + " " + lastName;
+    }
+
+    @Override
+    public String toString(){
         return firstName + " " + lastName;
     }
 }

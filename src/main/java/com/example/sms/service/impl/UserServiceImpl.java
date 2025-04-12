@@ -1,16 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.example.sms.service.impl;
 
-import com.example.sms.dto.UserDto;
-import com.example.sms.entity.Role;
-import com.example.sms.entity.User;
-import com.example.sms.mapper.UserMapper;
-import com.example.sms.repository.RoleRepository;
-import com.example.sms.repository.UserRepository;
-import com.example.sms.service.UserService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,13 +11,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author pinaa
- */
+import com.example.sms.dto.UserDto;
+import com.example.sms.entity.Role;
+import com.example.sms.entity.User;
+import com.example.sms.mapper.UserMapper;
+import com.example.sms.repository.RoleRepository;
+import com.example.sms.repository.UserRepository;
+import com.example.sms.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
@@ -106,5 +98,39 @@ public class UserServiceImpl implements UserService{
 
         return user;
     }
-
+    
+    @Override
+    public void assignRoleToUser(Long userId, Long roleId) {
+        User user = findUserById(userId);
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("Role not found with ID: " + roleId));
+        
+        // Avoid duplicate roles
+        if (user.getRoles().stream().noneMatch(r -> r.getId().equals(roleId))) {
+            user.getRoles().add(role);
+            userRepository.save(user);
+        }
+    }
+    
+    @Override
+    public void removeRoleFromUser(Long userId, Long roleId) {
+        User user = findUserById(userId);
+        
+        // Ensure user has at least one role after removal
+        if (user.getRoles().size() <= 1) {
+            throw new RuntimeException("Cannot remove the last role. User must have at least one role.");
+        }
+        
+        boolean removed = user.getRoles().removeIf(role -> role.getId().equals(roleId));
+        
+        if (removed) {
+            userRepository.save(user);
+        }
+    }
+    
+    @Override
+    public boolean hasRole(User user, String roleName) {
+        return user.getRoles().stream()
+                .anyMatch(role -> role.getName().equals(roleName));
+    }
 }
