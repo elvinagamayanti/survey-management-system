@@ -1,100 +1,111 @@
+function renderHBarChart(chartId, chartTitle) {
+  const el = document.getElementById(chartId);
+  if (!el) return;
 
-const options = {
-    series: [
-      {
-        name: "Income",
-        color: "#31C48D",
-        data: ["1420", "1620", "1820", "1420", "1650", "2120"],
+  const hasData = el.dataset.hasdata === "true";
+  if (!hasData) {
+    el.innerHTML = "<p class='text-center text-gray-500'>📭 Data tidak tersedia</p>";
+    return;
+  }  
+    
+  const labels = JSON.parse(el.dataset.labels);
+  const data = JSON.parse(el.dataset.data);
+
+
+    const options = {
+      chart: {
+        type: 'bar',
+        height: '320px',
+        fontFamily: "Inter, sans-serif",
+        toolbar: {
+          show: false,
+        },
       },
-      {
-        name: "Expense",
-        data: ["788", "810", "866", "788", "1100", "1200"],
-        color: "#F05252",
-      }
-    ],
-    chart: {
-      sparkline: {
+      series: [{
+        name: 'Jumlah Kegiatan',
+        data: data
+      }],
+      xaxis: {
+        categories: labels, 
+        labels: {
+          show: true,
+          style: {
+            fontFamily: "Inter, sans-serif",
+            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+          }
+        },
+        axisBorder: {
+          show: false,
+        },
+        axisTicks: {
+          show: false,
+        },
+      },
+      colors: ['#3b82f6'], // Tailwind blue-500
+      dataLabels: {
         enabled: false,
       },
-      type: "bar",
-      width: "100%",
-      height: 400,
-      toolbar: {
+      legend: {
         show: false,
-      }
-    },
-    fill: {
-      opacity: 1,
-    },
-    plotOptions: {
-      bar: {
-        horizontal: true,
-        columnWidth: "100%",
-        borderRadiusApplication: "end",
-        borderRadius: 6,
-        dataLabels: {
-          position: "top",
-        },
       },
-    },
-    legend: {
-      show: true,
-      position: "bottom",
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    tooltip: {
-      shared: true,
-      intersect: false,
-      formatter: function (value) {
-        return "$" + value
-      }
-    },
-    xaxis: {
-      labels: {
-        show: true,
+      tooltip: {
+        shared: true,
+        intersect: false,
         style: {
           fontFamily: "Inter, sans-serif",
-          cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
         },
-        formatter: function(value) {
-          return "$" + value
+      },
+      grid: {
+        show: false,
+        strokeDashArray: 4,
+        padding: {
+          left: 2,
+          right: 2,
+          top: -14
+        },
+      },
+      yaxis: {
+        labels: {
+          show: true,
+          style: {
+            fontFamily: "Inter, sans-serif",
+            cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
+          }
         }
       },
-      categories: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      axisTicks: {
-        show: false,
+      fill: {
+        opacity: 1,
       },
-      axisBorder: {
-        show: false,
-      },
-    },
-    yaxis: {
-      labels: {
+      stroke: {
         show: true,
-        style: {
-          fontFamily: "Inter, sans-serif",
-          cssClass: 'text-xs font-normal fill-gray-500 dark:fill-gray-400'
-        }
-      }
-    },
-    grid: {
-      show: true,
-      strokeDashArray: 4,
-      padding: {
-        left: 2,
-        right: 2,
-        top: -20
+        width: 0,
+        colors: ["transparent"],
       },
-    },
-    fill: {
-      opacity: 1,
-    }
-  }
-  
-  if(document.getElementById("horizontal-bar-chart") && typeof ApexCharts !== 'undefined') {
-    const chart = new ApexCharts(document.getElementById("horizontal-bar-chart"), options);
+      states: {
+        hover: {
+          filter: {
+            type: "darken",
+            value: 1,
+          },
+        },
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          columnWidth: "100%",
+          borderRadiusApplication: "end",
+          borderRadius: 6,
+          dataLabels: {
+            position: "top",
+          },
+        },
+      },    
+    };
+
+    const chart = new ApexCharts(el, options);
     chart.render();
-  }
-  
+  };
+
+  window.addEventListener('load', function () {
+    renderHBarChart("hbar-satker", "Jumlah Kegiatan per Satker");
+  });

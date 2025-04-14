@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: ["../resources/templates/**/*.{html,js}"],
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'], // Default font-family
+        sans: ['InterVariable', 'sans-serif'], // Default font-family
       },
       colors: {
         primary: '#0099dd', // #002B6A

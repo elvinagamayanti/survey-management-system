@@ -4,8 +4,20 @@
  */
 package com.example.sms.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.example.sms.dto.KegiatanDto;
+import com.example.sms.service.KegiatanService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -16,9 +28,42 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
     
+   @Autowired
+    private KegiatanService kegiatanService;
+
     @GetMapping("/")
-    public String home() {
-        return "index";
+    public String index(Model model) throws JsonProcessingException {
+        List<KegiatanDto> kegiatanList = kegiatanService.ambilDaftarKegiatan();
+
+        // === CHART 2: JUMLAH PER SATKER ===
+        Map<String, Long> countPerSatker = kegiatanList.stream()
+                .collect(Collectors.groupingBy(
+                        k -> k.getSatker().getName(),
+                        Collectors.counting()
+                ));
+
+        List<String> labelsSatker = new ArrayList<>(countPerSatker.keySet());
+        List<Long> dataSatker = new ArrayList<>(countPerSatker.values());
+
+        model.addAttribute("labelsSatker", new ObjectMapper().writeValueAsString(labelsSatker));
+        model.addAttribute("dataSatker", new ObjectMapper().writeValueAsString(dataSatker));
+        model.addAttribute("hasDataSatker", !labelsSatker.isEmpty());
+
+        // === CHART 1: JUMLAH PER PROGRAM ===
+        // Map<String, Long> countPerProgram = kegiatanList.stream()
+        //         .collect(Collectors.groupingBy(
+        //                 k -> k.getProgram().getName(),
+        //                 Collectors.counting()
+        //         ));
+
+        // List<String> labelsProgram = new ArrayList<>(countPerProgram.keySet());
+        // List<Long> dataProgram = new ArrayList<>(countPerProgram.values());
+
+        // model.addAttribute("labelsProgram", new ObjectMapper().writeValueAsString(labelsProgram));
+        // model.addAttribute("dataProgram", new ObjectMapper().writeValueAsString(dataProgram));
+        // model.addAttribute("hasDataProgram", !labelsProgram.isEmpty());
+
+        return "index"; 
     }
 
     @GetMapping("/kegiatan")

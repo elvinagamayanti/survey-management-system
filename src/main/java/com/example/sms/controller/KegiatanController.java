@@ -112,5 +112,4 @@ public class KegiatanController {
         model.addAttribute("kegiatan", kegiatan);
         return "/operator/detailKegiatan";
     }
-
 }
