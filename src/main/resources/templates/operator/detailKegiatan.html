@@ -33,7 +33,7 @@
             <!-- Main Tab Content -->
             <div id="default-tab-content">
                 <!-- Tab Umum Content -->
-                <div class="hidden p-4 rounded-lg bg-primary bg-opacity-30 dark:bg-gray-800" id="umum" role="tabpanel" aria-labelledby="umum-tab">
+                <div class="hidden p-4 rounded-lg bg-primary-30 dark:bg-gray-800" id="umum" role="tabpanel" aria-labelledby="umum-tab">
                     <form class="w-full mx-auto">
                         <!-- Umum form fields -->
                         <div class="relative z-0 w-full mb-5 group">
@@ -89,7 +89,7 @@
                                         th:class="${'inline-flex items-center px-4 py-3 rounded-lg w-full ' + 
                                         (step.isActive ? 'text-white bg-blue-700 active dark:bg-blue-600' : 
                                         (step.isCompleted ? 'text-gray-900 bg-green-200 hover:bg-green-300' : 
-                                        'text-gray-400 cursor-not-allowed bg-primary bg-opacity-30 dark:text-fontdark'))}"
+                                        'text-gray-400 cursor-not-allowed bg-primary-30 dark:text-fontdark'))}"
                                         th:attr="data-tabs-target='#' + ${step.tahap.toLowerCase()}, 
                                                  aria-controls=${step.tahap.toLowerCase()},
                                                  aria-selected=${step.isActive},
@@ -115,7 +115,7 @@
                             <!-- Step content for each step - will be populated dynamically -->
                             <div th:each="step : ${steps}" 
                                  th:id="${step.tahap.toLowerCase()}" 
-                                 th:class="${'p-6 bg-primary bg-opacity-30 text-medium text-fontdark dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full' + (step.isActive ? '' : ' hidden')}" 
+                                 th:class="${'p-6 bg-primary-30 text-medium text-fontdark dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full' + (step.isActive ? '' : ' hidden')}" 
                                  role="tabpanel" 
                                  th:attr="aria-labelledby=${step.tahap.toLowerCase() + '-tab'}">
                                 
@@ -410,11 +410,11 @@
                     tab.setAttribute('aria-selected', isTargetTab ? 'true' : 'false');
                     
                     if (isTargetTab) {
-                        tab.classList.remove('text-gray-500', 'hover:text-gray-700', 'bg-primary', 'bg-opacity-30');
+                        tab.classList.remove('text-gray-500', 'hover:text-gray-700', 'bg-primary-30');
                         tab.classList.add('text-white', 'bg-blue-700', 'active');
                     } else {
                         tab.classList.remove('text-white', 'bg-blue-700', 'active');
-                        tab.classList.add('text-gray-500', 'hover:text-gray-700', 'bg-primary', 'bg-opacity-30');
+                        tab.classList.add('text-gray-500', 'hover:text-gray-700', 'bg-primary-30');
                     }
                 }
             });
