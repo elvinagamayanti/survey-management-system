@@ -49,7 +49,13 @@ public class SecurityConfig {
                                 .requestMatchers("/operator/surveys/**").permitAll()
                                 .requestMatchers("/main.css").permitAll()
                                 .requestMatchers("/SMS-Logo.png").permitAll()
+                                .requestMatchers("/api/v1/auth/**").permitAll()
+                                .requestMatchers("/api/v1/**").authenticated()
                                 .anyRequest().authenticated()
+                                .and()
+                                    .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+                                    .addFilter(new JwtAuthorizationFilter(authenticationManager()))
+                                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")

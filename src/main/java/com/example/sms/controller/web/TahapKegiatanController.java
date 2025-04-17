@@ -1,4 +1,4 @@
-package com.example.sms.controller;
+package com.example.sms.controller.web;
 
 import com.example.sms.dto.SubStepDto;
 import com.example.sms.entity.Kegiatan;
