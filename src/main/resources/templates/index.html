@@ -3,16 +3,81 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html>
+<html 
+    lang="en"
+    xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link th:href="@{/main.css}" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     </head>
-    <body class="bg-blue-300">
-        <header class="bg-white container mx-auto">
-            <h1 class="text-4xl font-bold p-8">Home Page</h1>
-        </header>
+    
+    <body>
+        <div th:replace="layout/navbar :: navbar"></div>
+        <div th:replace="layout/sidebar :: sidebar"></div>
+        
+        <div class="p-4 sm:ml-64">
+            <div class="p-4 mt-14">
+                <h1 class="text-4xl font-extrabold text-fontdark dark:text-black">Dashboard</h1>
+                <h2 class="text-2xl font-normal text-font dark:text-black mb-6">Superadmin</h2>
+
+                <div class="grid grid-cols-3">
+                    <div class="max-w-sm w-full bg-primary-30 rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                        <div class="flex justify-center">
+                            <h2 class="text-xl font-extrabold text-font dark:text-white">Jumlah Kegiatan per Satker</h2>
+                        </div>
+                    
+                        <!-- Chart 1: Kegiatan per Satker -->
+                        <!-- Pie Chart: Kegiatan per Satker -->
+                        <div id="pie-satker"
+                            class="my-10"
+                            th:data-labels="${labelsSatker}"
+                            th:data-data="${dataSatker}"
+                            th:data-hasdata="${hasDataSatker}">
+                        </div>
+                    </div>
+                    <!-- Bar Chart -->
+                    <div class="max-w-sm w-full bg-primary-30  rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                        
+                        <div class="flex justify-center">
+                            <h2 class="text-xl font-extrabold text-font dark:text-white">Jumlah Kegiatan per Satker</h2>
+                        </div>
+                        <!-- Chart 2: Kegiatan per Satker -->
+                        <div id="bar-satker"
+                            class="my-8"
+                            th:data-labels="${labelsSatker}"
+                            th:data-data="${dataSatker}"
+                            th:data-hasdata="${hasDataSatker}">
+                        </div>
+                    </div>
+    <!-- Blok 3 -->
+                    <div class="max-w-sm w-full bg-primary-30  rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
+                        <div class="flex justify-center">
+                            <h2 class="text-xl font-extrabold text-font dark:text-white">Jumlah Kegiatan per Satker</h2>
+                        </div>
+                        <!-- Chart 3: Horizontal Kegiatan per Satker -->
+                        <div id="hbar-satker"
+                            class="my-8"
+                            th:data-labels="${labelsSatker}"
+                            th:data-data="${dataSatker}"
+                            th:data-hasdata="${hasDataSatker}">
+                        </div>
+                        
+                    </div>
+  
+                </div>
+                
+
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script th:src="@{/js/piechart.js}"></script>
+        <script th:src="@{/js/barchart.js}"></script>
+        <script th:src="@{/js/horizontal-barchart.js}"></script>
+        <script th:src="@{/js/darklightmode.js}"></script>
+
     </body>
 </html>

@@ -1,0 +1,9 @@
+:root{
+    --color-primary: #008ed6;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+@import '@fontsource/inter';

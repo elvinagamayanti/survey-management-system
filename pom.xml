@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.0</version>
+		<version>3.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
@@ -28,8 +28,16 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+        <node.version>v20.14.0</node.version>
+    	<npm.version>10.7.0</npm.version>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -42,6 +50,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+                <dependency>
+                    <groupId>nz.net.ultraq.thymeleaf</groupId>
+                    <artifactId>thymeleaf-layout-dialect</artifactId>
+                </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
@@ -81,6 +93,40 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>font-awesome</artifactId>
+			<version>4.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.15</version>
+		</dependency>
+		<!-- For Swagger -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+		<!-- For JWT -->
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>4.0.0</version> <!-- Or newer version compatible with Jakarta EE -->
+		</dependency>
+
+		<!-- For Jakarta Servlet API -->
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -97,6 +143,54 @@
 					</excludes>
 				</configuration>
 			</plugin>
+                        
+                    <plugin>
+                                <groupId>com.github.eirslett</groupId>
+                                <artifactId>frontend-maven-plugin</artifactId>
+                                <version>1.15.0</version>
+                                <executions>
+
+                                    <execution>
+                                        <id>install node and npm</id>
+                                        <goals>
+                                            <goal>install-node-and-npm</goal>
+                                        </goals>
+                                        <phase>generate-resources</phase>
+                                        <configuration>
+                                            <nodeVersion>${node.version}</nodeVersion>
+                                            <npmVersion>${npm.version}</npmVersion>
+                                        </configuration>
+                                    </execution>
+
+                                    <execution>
+                                        <id>npm install</id>
+                                        <goals>
+                                            <goal>npm</goal>
+                                        </goals>
+                                        <phase>generate-resources</phase>
+                                        <configuration>
+                                            <arguments>install</arguments>
+                                        </configuration>
+                                    </execution>
+
+                                    <execution>
+                                        <id>npm build</id>
+                                        <goals>
+                                            <goal>npm</goal>
+                                        </goals>
+                                        <phase>generate-resources</phase>
+                                        <configuration>
+                                            <arguments>run build</arguments>
+                                        </configuration>
+                                    </execution>
+
+                                </executions>
+                                <configuration>
+                                    <nodeVersion>${node.version}</nodeVersion>
+                                    <workingDirectory>src/main/frontend</workingDirectory>
+                                    <installDirectory>target</installDirectory>
+                                </configuration>
+                        </plugin>
 		</plugins>
 	</build>
 
