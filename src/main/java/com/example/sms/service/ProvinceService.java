@@ -4,9 +4,7 @@
  */
 package com.example.sms.service;
 
-
 import com.example.sms.dto.ProvinceDto;
-import com.example.sms.entity.Satker;
 
 import java.util.List;
 
@@ -16,10 +14,15 @@ import java.util.List;
  */
 public interface ProvinceService {
     List<ProvinceDto> ambilDaftarProvinsi();
+
     void perbaruiDataProvinsi(ProvinceDto provinceDto);
+
     void hapusDataProvinsi(Long provinceId);
+
     void simpanDataProvinsi(ProvinceDto provinceDto);
+
     ProvinceDto cariProvinceById(Long id);
+
     ProvinceDto cariProvinceByCode(String code);
     // List<Satker> getSatkersByProvinceCode(String provinceCode);
 }

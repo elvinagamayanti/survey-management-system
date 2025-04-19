@@ -10,8 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,16 +31,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "satkers")
 public class Satker {
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false)
     private String name;
-    
+
     @Column(nullable = false)
     private String code;
-    
+
     @Column(nullable = true)
     private String address;
 
@@ -51,19 +49,19 @@ public class Satker {
 
     @Column(nullable = true)
     private String email;
-    
+
     @Column(nullable = false)
     @CreationTimestamp
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date createdOn;
-    
+
     @UpdateTimestamp
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date updatedOn;    
-    
+    private Date updatedOn;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "satker", cascade = CascadeType.ALL)
     private List<User> userList;
-    
+
     @OneToMany(mappedBy = "satker", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Kegiatan> listKegiatans = new ArrayList<>();
 
@@ -75,8 +73,7 @@ public class Satker {
     private Boolean isProvince;
 
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 }
-
