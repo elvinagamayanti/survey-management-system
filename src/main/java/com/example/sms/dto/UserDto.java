@@ -41,21 +41,21 @@ public class UserDto {
     @Email
     private String email;
     private String password;
-    
+
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="satker_id")
+    @JoinColumn(name = "satker_id")
     private Satker satker;
-    
-    public String getNamaSatker(){
+
+    public String getNamaSatker() {
         return "Badan Pusat Statistik " + satker.getName();
     }
-    
-    public String getFullName(){
+
+    public String getFullName() {
         return firstName + " " + lastName;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return firstName + " " + lastName;
     }
 }

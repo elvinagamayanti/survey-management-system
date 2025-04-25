@@ -54,7 +54,7 @@ public class UserController {
             throw new RuntimeException("User not found");
         }
         model.addAttribute("user", user);
-        return "index";
+        return "redirect:/";
     }
 
     @GetMapping("/navbar")

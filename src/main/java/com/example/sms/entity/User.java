@@ -32,38 +32,37 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String name;
-    
-    @Column(nullable=false)
+
+    @Column(nullable = false)
     private String nip;
 
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(
-            name="users_roles",
-            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles", joinColumns = {
+            @JoinColumn(name = "USER_ID", referencedColumnName = "ID") }, inverseJoinColumns = {
+                    @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID") })
     private List<Role> roles = new ArrayList<>();
-    
+
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="satker_id")
+    @JoinColumn(name = "satker_id")
     private Satker satker;
-    
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Kegiatan> listKegiatans = new ArrayList<>();
-    
-    public String getNamaSatker(){
+
+    public String getNamaSatker() {
         return "Badan Pusat Statistik " + satker.getName();
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 }

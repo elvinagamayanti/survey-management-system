@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.example.sms.entity.Satker;
 import com.example.sms.repository.SatkerRepository;
 
 /**
@@ -26,7 +25,6 @@ import com.example.sms.repository.SatkerRepository;
 public class ProvinceServiceImpl implements ProvinceService {
     private ProvinceRepository provinceRepository;
     private SatkerRepository satkerRepository;
-
 
     public ProvinceServiceImpl(ProvinceRepository provinceRepository, SatkerRepository satkerRepository) {
         this.provinceRepository = provinceRepository;
@@ -73,24 +71,26 @@ public class ProvinceServiceImpl implements ProvinceService {
     }
     // @Override
     // public ProvinceDto cariProvinceByCode(String code) {
-    //     Province province = provinceRepository.findByCode(code)
-    //         .orElseThrow(() -> new RuntimeException("Province dengan code " + code + " tidak ditemukan"));
+    // Province province = provinceRepository.findByCode(code)
+    // .orElseThrow(() -> new RuntimeException("Province dengan code " + code + "
+    // tidak ditemukan"));
 
-    //     return ProvinceMapper.mapToProvinceDto(province);
+    // return ProvinceMapper.mapToProvinceDto(province);
     // }
 
     // @Override
     // public ProvinceDto cariProvinceByCode(String code) {
-    //     Optional<Province> optionalProvince = provinceRepository.findByCode(code);
-    //     if (optionalProvince.isPresent()) {
-    //         return ProvinceMapper.mapToProvinceDto(optionalProvince.get());
-    //     } else {
-    //         throw new IllegalArgumentException("Province with code " + code + " not found");
-    //     }
+    // Optional<Province> optionalProvince = provinceRepository.findByCode(code);
+    // if (optionalProvince.isPresent()) {
+    // return ProvinceMapper.mapToProvinceDto(optionalProvince.get());
+    // } else {
+    // throw new IllegalArgumentException("Province with code " + code + " not
+    // found");
+    // }
     // }
 
     // @Override
     // public List<Satker> getSatkersByProvinceCode(String provinceCode) {
-    //     return satkerRepository.findAllSatkersByProvinceCode(provinceCode);
+    // return satkerRepository.findAllSatkersByProvinceCode(provinceCode);
     // }
 }

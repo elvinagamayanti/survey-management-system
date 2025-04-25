@@ -4,18 +4,21 @@
  */
 package com.example.sms.repository;
 
-import com.example.sms.entity.Province;
-
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.example.sms.entity.Province;
 
 /**
  *
  * @author pinaa
  */
+@Repository
 public interface ProvinceRepository extends JpaRepository<Province, Long> {
 
     Province findByName(String name);
+
     Optional<Province> findByCode(String code);
 }
